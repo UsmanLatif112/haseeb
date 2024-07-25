@@ -1,0 +1,19 @@
+from lib.imports import *
+
+class Login:
+    USERNAME = '//*[@id="app__container"]//input[@id="username"]'
+    PASSWORD = '//*[@id="app__container"]//input[@id="password"]'
+    SIGN_BTN = '//*[@id="app__container"]//div[@class="login__form_action_container "]/button[contains(normalize-space(), "Sign in")]'
+class Code:
+    Search_Bar = '//*[@placeholder="Search"]'
+    Post_fil = '//button[contains(normalize-space(), "Posts")]'
+    Sort_By = '//button[contains(normalize-space(), "Sort by")]'
+    Latest_post = '//*[@class="display-flex"][contains(normalize-space(), "Latest")]'
+    Latest_post_btn = '(//button[contains(normalize-space(), "Show results")])[1]'
+    Date_posted = '//button[contains(normalize-space(), "Date posted")]'
+    past_24_hours = '//*[@class="display-flex"][contains(normalize-space(), "Past 24 hours")]'
+    past_24_hours_btn = '(//button[contains(normalize-space(), "Show results")])[2]'
+    first_post_cmnt = '(//*[@id="fie-impression-container"])[1]//button[contains(normalize-space(), "Comment")]'
+    cmnt_box = '(//*[@id="fie-impression-container"])[1]//*[@data-placeholder="Add a comment…"]'
+    post_btn = '(//button[contains(normalize-space(), "Post")])[2]'
+    

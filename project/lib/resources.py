@@ -16,4 +16,8 @@ class Code:
     first_post_cmnt = '(//*[@id="fie-impression-container"])[1]//button[contains(normalize-space(), "Comment")]'
     cmnt_box = '(//*[@id="fie-impression-container"])[1]//*[@data-placeholder="Add a comment…"]'
     post_btn = '(//button[contains(normalize-space(), "Post")])[2]'
-    
+    security_check = '//h1[contains(normalize-space(), "Let’s do a quick security check")]'
+    security_code = '//h1[contains(normalize-space(), "Enter the code you see on your authenticator app")]'
+    security_code_input = '(//*[contains(normalize-space(), "Enter the code you see on your authenticator app")]//*[@name="pin"])[1]'
+    main_feed = '//*[@aria-label="Main Feed"]'
+    security_code_submit_btn = '(//button[contains(normalize-space(), "Submit")])[1]'

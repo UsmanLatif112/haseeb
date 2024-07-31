@@ -3,7 +3,7 @@
 import time, csv, pyautogui, random, json, requests, hashlib
 from datetime import date
 from PIL import Image
-
+import pandas as pd
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By

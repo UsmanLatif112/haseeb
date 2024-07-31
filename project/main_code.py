@@ -107,19 +107,20 @@ def main_code(username, password,session_id):
                     print("login Successful!")
                     time.sleep(1)
                     stop_profile()
+                else:
+                    print("login failed!")
+                    print("NO SECURITY CHECK FOUND")
+                    stop_profile()
+                    time.sleep(2)
+                    remove_profile()
+                    return {
+                                    "is_logged_in":False,
+                                    "is_code_required":False
+                                }   
             except Exception as e:
                 import traceback
                 traceback.print_exc()
-                print("login failed!")
-                print("NO SECURITY CHECK FOUND")
-                stop_profile()
-                time.sleep(2)
-                remove_profile()
-                return {
-                                "is_logged_in":False,
-                                "is_code_required":False
-                            } 
-                
+                pass
             try:
                 Main_Feed = HomePage(driver)
                 Main_Feed.wait_ten(Code.main_feed)

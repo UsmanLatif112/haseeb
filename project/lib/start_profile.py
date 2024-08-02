@@ -8,7 +8,7 @@ from lib.create_profile import create_profile
 from lib.imports import *
 from lib.data import *
 
-token = Mlx_data.tokenn
+token = Mlx_data().get_access_token()
 
 HEADERSS = {  
     'Accept': 'application/json',
@@ -16,9 +16,8 @@ HEADERSS = {
     'Authorization': f'Bearer {token}'
     }
 
-profile_id = create_profile()
 FOLDER_ID = Mlx_data.folder_id
-PROFILE_ID = profile_id
+PROFILE_ID = None
 MLX_BASE = "https://api.multilogin.com"
 MLX_LAUNCHER = "https://launcher.mlx.yt:45001/api/v1"
 MLX_LAUNCHER_V2 = (
@@ -50,7 +49,10 @@ def signin() -> str:
 
 
 
-def start_profile() -> webdriver:
+def start_profile(profile_name,notes_str) -> webdriver:
+    global PROFILE_ID
+    PROFILE_ID = create_profile(profile_name,notes_str)
+
     r = requests.get(
         f"{MLX_LAUNCHER_V2}/profile/f/{FOLDER_ID}/p/{PROFILE_ID}/start?automation_type=selenium",
         headers=HEADERS,
@@ -71,8 +73,8 @@ def start_profile() -> webdriver:
 
 
 
-def stop_profile():
-    url = f"https://launcher.mlx.yt:45001/api/v1/profile/stop/p/{PROFILE_ID}"
+def stop_profile(profile_iD):
+    url = f"https://launcher.mlx.yt:45001/api/v1/profile/stop/p/{profile_iD}"
     
     payload={}
     headers = HEADERSS
@@ -80,15 +82,15 @@ def stop_profile():
     if response.status_code != 200:
         print(f"\nError while stopping profile: {response.text}\n")
     else:
-        print(f"\nProfile {PROFILE_ID} stopped.\n")
+        print(f"\nProfile {profile_iD} stopped.\n")
         
         
         
         
-def remove_profile():
+def remove_profile(profile_iD):
     url = "https://api.multilogin.com/profile/remove"
     payload = json.dumps({
-    "ids": [PROFILE_ID],
+    "ids": [profile_iD],
     "permanently": False
     })
     HEADERS = HEADERSS

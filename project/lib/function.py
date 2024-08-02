@@ -1,5 +1,5 @@
 from lib.imports import *
-
+from selenium.common.exceptions import TimeoutException
 
 def get_random_row(csv_filepath):
     # Read the CSV file
@@ -20,6 +20,20 @@ class HomePage(BasePage):
         
     def enter_Name(self, xpath: str, clientname: str):
         self.driver.find_element(By.XPATH, xpath).send_keys(clientname)
+        
+    
+    def click_element(self, xpath: str):
+        self.driver.find_element(By.XPATH, xpath).click()
+        
+    def check_element_exists(self, xpath: str, timeout: int = 10):
+        try:
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, xpath))
+            )
+            return element
+        except TimeoutException:
+            raise Exception(f"Element with XPath '{xpath}' not found within {timeout} seconds.")
+
         
     def enter_name_delay(self, xpath: str, clientname: str, delay=0.2):
         element = self.wait(xpath)
@@ -64,7 +78,22 @@ class HomePage(BasePage):
             f.writelines(data)
 
     
+api_key = 'c102b4fcaed58016e9fc39489ae89415'
 
+# 1. Sending CAPTCHA to 2Captcha for solving
+def submit_captcha(site_key,site_url):
+    response = requests.post('http://2captcha.com/in.php',data={
+            'key': api_key,
+            'method': 'funcaptcha',
+            'publickey': site_key,
+            'pageurl': site_url
+        }
+    )
+    result = response.json()
+    if result['status'] == 1:
+        return result['request']  # Request ID
+    else:
+        raise Exception('Error submitting CAPTCHA: {}'.format(result['request']))
 
  
     

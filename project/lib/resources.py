@@ -17,7 +17,14 @@ class Code:
     cmnt_box = '(//*[@id="fie-impression-container"])[1]//*[@data-placeholder="Add a comment…"]'
     post_btn = '(//button[contains(normalize-space(), "Post")])[2]'
     security_check = '//h1[contains(normalize-space(), "Let’s do a quick security check")]'
+    email_code_check = '//h1[contains(normalize-space(), "Let’s do a quick verification")]'
     security_code = '//h1[contains(normalize-space(), "Enter the code you see on your authenticator app")]'
     security_code_input = '(//*[contains(normalize-space(), "Enter the code you see on your authenticator app")]//*[@name="pin"])[1]'
+    security_code_input_em = '(//*[contains(normalize-space(), "The login attempt seems suspicious. To finish signing in please enter the verification code we sent to your email address.")]//*[@name="pin"])[1]'
     main_feed = '//*[@aria-label="Main Feed"]'
     security_code_submit_btn = '(//button[contains(normalize-space(), "Submit")])[1]'
+
+class Captcha:
+    funcaptcha_iframe = '//iframe[@id="captcha-internal"]'
+    # funcaptcha_iframe = '//*[@role="main"]//*[@id="captcha-challenge"]//*[@name="captchaSiteKey"]'
+    # funcaptcha_iframe = '//*[@id="FunCaptcha"]/iframe'
